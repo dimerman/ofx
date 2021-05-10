@@ -13,7 +13,7 @@ describe OFX::Transaction do
     end
 
     it "should set amount" do
-      @transaction.amount.should == BigDecimal('-35.34')
+      @transaction.amount.should == BigDecimal('-35.34', 0)
     end
 
     it "should cast amount to BigDecimal" do
@@ -41,7 +41,7 @@ describe OFX::Transaction do
     end
 
     it 'should have user date' do
-      @transaction.occurred_at.should == Time.parse("2009-09-09 08:00:00")
+      @transaction.occurred_at.should == Time.parse("2009-09-09 08:00:00 +0000")
     end
 
     it "should have type" do
@@ -59,7 +59,7 @@ describe OFX::Transaction do
     end
 
     it "should set amount" do
-      @transaction.amount.should == BigDecimal('60.39')
+      @transaction.amount.should == BigDecimal('60.39', 0)
     end
 
     it "should set amount in pennies" do
@@ -83,7 +83,7 @@ describe OFX::Transaction do
     end
 
     it "should have user date" do
-      @transaction.occurred_at.should == Time.parse("2009-09-16 08:00:00")
+      @transaction.occurred_at.should == Time.parse("2009-09-16 08:00:00 +0000")
     end
 
     it "should have type" do
@@ -113,7 +113,7 @@ describe OFX::Transaction do
     end
 
     it "should have user date" do
-      @transaction.occurred_at.should == Time.parse("2009-10-17 12:00:00")
+      @transaction.occurred_at.should == Time.parse("2009-10-17 12:00:00 -0300")
     end
 
     it "should have type" do
@@ -176,7 +176,7 @@ describe OFX::Transaction do
       end
 
       it "should set amount" do
-        @transaction.amount.should == BigDecimal('-11.76')
+        @transaction.amount.should == BigDecimal('-11.76', 0)
       end
 
       it "should set amount in pennies" do
@@ -190,7 +190,7 @@ describe OFX::Transaction do
       end
 
       it "should set amount" do
-        @transaction.amount.should == BigDecimal('47.01')
+        @transaction.amount.should == BigDecimal('47.01', 0)
       end
 
       it "should set amount in pennies" do

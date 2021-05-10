@@ -12,11 +12,11 @@ describe OFX::Statement do
     end
 
     it "returns start date" do
-      statement.start_date.should == Time.parse("2009-10-09 08:00:00")
+      statement.start_date.should == Time.parse("2009-10-09 08:00:00 +0000")
     end
 
     it "returns end date" do
-      statement.end_date.should == Time.parse("2009-11-03 08:00:00")
+      statement.end_date.should == Time.parse("2009-11-03 08:00:00 +0000")
     end
 
     it "returns account" do
@@ -34,7 +34,7 @@ describe OFX::Statement do
       let(:balance) { statement.balance }
 
       it "returns balance" do
-        balance.amount.should == BigDecimal('598.44')
+        balance.amount.should == BigDecimal('598.44', 0)
       end
 
       it "returns balance in pennies" do
@@ -42,7 +42,7 @@ describe OFX::Statement do
       end
 
       it "returns balance date" do
-        balance.posted_at.should == Time.parse("2009-11-01")
+        balance.posted_at.should == Time.parse("2009-11-01 00:00:00 +0000")
       end
     end
 
@@ -50,7 +50,7 @@ describe OFX::Statement do
       let(:available_balance) { statement.available_balance }
 
       it "returns available balance" do
-        available_balance.amount.should == BigDecimal('1555.99')
+        available_balance.amount.should == BigDecimal('1555.99', 0)
       end
 
       it "returns available balance in pennies" do
@@ -58,7 +58,7 @@ describe OFX::Statement do
       end
 
       it "returns available balance date" do
-        available_balance.posted_at.should == Time.parse("2009-11-01")
+        available_balance.posted_at.should == Time.parse("2009-11-01 00:00:00 +0000")
       end
 
       context "when AVAILBAL not found" do
@@ -79,11 +79,11 @@ describe OFX::Statement do
     end
 
     it "returns start date" do
-      statement.start_date.should == Time.parse("2007-05-09 12:00:00")
+      statement.start_date.should == Time.parse("2007-05-09 12:00:00 +0000")
     end
 
     it "returns end date" do
-      statement.end_date.should == Time.parse("2007-06-08 12:00:00")
+      statement.end_date.should == Time.parse("2007-06-08 12:00:00 +0000")
     end
 
     it "returns account" do
@@ -100,7 +100,7 @@ describe OFX::Statement do
       let(:balance) { statement.balance }
 
       it "returns balance" do
-        balance.amount.should == BigDecimal('-1111.01')
+        balance.amount.should == BigDecimal('-1111.01', 0)
       end
 
       it "returns balance in pennies" do
@@ -108,7 +108,7 @@ describe OFX::Statement do
       end
 
       it "returns balance date" do
-        balance.posted_at.should == Time.parse("2007-06-23 19:20:13")
+        balance.posted_at.should == Time.parse("2007-06-23 19:20:13 +0000")
       end
     end
 
@@ -116,7 +116,7 @@ describe OFX::Statement do
       let(:available_balance) { statement.available_balance }
 
       it "returns available balance" do
-        available_balance.amount.should == BigDecimal('19000.99')
+        available_balance.amount.should == BigDecimal('19000.99', 0)
       end
 
       it "returns available balance in pennies" do
@@ -124,7 +124,7 @@ describe OFX::Statement do
       end
 
       it "returns available balance date" do
-        available_balance.posted_at.should == Time.parse("2007-06-23 19:20:13")
+        available_balance.posted_at.should == Time.parse("2007-06-23 19:20:13 +0000")
       end
     end
   end
