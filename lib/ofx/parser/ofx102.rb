@@ -10,10 +10,7 @@ module OFX
         "MONEYMRKT" => :moneymrkt
       }
 
-      TRANSACTION_TYPES = [
-        'ATM', 'CASH', 'CHECK', 'CREDIT', 'DEBIT', 'DEP', 'DIRECTDEBIT', 'DIRECTDEP', 'DIV',
-        'FEE', 'INT', 'OTHER', 'PAYMENT', 'POS', 'REPEATPMT', 'SRVCHG', 'XFER'
-      ].inject({}) { |hash, tran_type| hash[tran_type] = tran_type.downcase.to_sym; hash }
+      TRANSACTION_TYPES = %w[ATM CASH CHECK CREDIT DEBIT DEP DIRECTDEBIT DIRECTDEP DIV FEE INT OTHER PAYMENT POS REPEATPMT SRVCHG XFER].inject({}) { |hash, tran_type| hash[tran_type] = tran_type.downcase.to_sym; hash }
 
       SEVERITY = {
         "INFO" => :info,
@@ -86,7 +83,7 @@ module OFX
         OFX::Account.new({
           :bank_id           => node.search("bankacctfrom > bankid").inner_text,
           :id                => node.search("bankacctfrom > acctid, ccacctfrom > acctid").inner_text,
-          :type              => ACCOUNT_TYPES[node.search("bankacctfrom > accttype").inner_text.to_s.upcase],
+          :type              => ACCOUNT_TYPES[node.search("bankacctfrom > accttype, ccacctfrom > accttype").inner_text.to_s.upcase],
           :transactions      => build_transactions(node),
           :balance           => build_balance(node),
           :available_balance => build_available_balance(node),
