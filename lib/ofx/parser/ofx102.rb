@@ -146,7 +146,7 @@ module OFX
 
       # Input format is `YYYYMMDDHHMMSS.XXX[gmt offset[:tz name]]`
       def build_date(date)
-        tz_pattern = /(?:\[([+-]?\d{1,4})\:\S{3}\])?\z/
+        tz_pattern = /(?:\[([+-]?\d{1,4}):\S{3}\])?\z/
 
         # Timezone offset handling
         date.sub!(tz_pattern, '')
@@ -186,12 +186,12 @@ module OFX
             :posted_at => build_date(node.search("availbal > dtasof").inner_text)
           })
         else
-          return nil
+          nil
         end
       end
 
       def to_decimal(amount)
-        BigDecimal.new(amount.to_s.gsub(',', '.'))
+        BigDecimal(amount.to_s.gsub(',', '.'), 0)
       end
     end
   end
